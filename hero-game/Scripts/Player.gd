@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		
 		if velocity.length_squared() >= 0.1:
 			var look_position := global_position + Vector3(velocity.x, 0, velocity.z)
-			$PlayerBody.look_at(look_position, Vector3.UP, true)
+			$son.look_at(look_position, Vector3.UP, true)
 		
 		
 	else:

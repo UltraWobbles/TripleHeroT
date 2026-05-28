@@ -1,16 +1,7 @@
 [gd_scene format=3 uid="uid://gyvk2x32704o"]
 
-[ext_resource type="Script" uid="uid://c687t8r88lm7u" path="res://Scripts/Player.gd" id="1_23sq3"]
-[ext_resource type="Texture2D" uid="uid://bpa8n0luworwr" path="res://Images/download.jpg" id="2_n8be1"]
-[ext_resource type="Script" uid="uid://dta6lcvkvk6bo" path="res://Scripts/SpringCamera.gd" id="2_tp648"]
-[ext_resource type="Script" uid="uid://bu7q0r5mtot54" path="res://Scripts/camera_follow.gd" id="3_0jpfo"]
-[ext_resource type="Texture2D" uid="uid://batsa334uutbv" path="res://Images/AD.jpg" id="3_k3vav"]
+[ext_resource type="PackedScene" uid="uid://mrveyhndeh8d" path="res://Characters/player.tscn" id="2_tp648"]
 [ext_resource type="Script" uid="uid://cek3b21h4yfls" path="res://Scripts/testbox.gd" id="6_3pxkc"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_tp648"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0jpfo"]
-albedo_texture = ExtResource("2_n8be1")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_23sq3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -29,17 +20,6 @@ tonemap_mode = 2
 [sub_resource type="BoxShape3D" id="BoxShape3D_tp648"]
 size = Vector3(15.97168, 0.037109375, 15.876953)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cruhp"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_0jpfo"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cruhp"]
-albedo_color = Color(0.7925209, 0.64869267, 0.019505661, 1)
-albedo_texture = ExtResource("3_k3vav")
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_0jpfo"]
-radius = 0.3
-
 [sub_resource type="BoxMesh" id="BoxMesh_k3vav"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3pxkc"]
@@ -48,11 +28,6 @@ albedo_color = Color(0.22745098, 0.9098039, 0.25882354, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_rxb0p"]
 
 [node name="scene1" type="Node3D" unique_id=1626793704]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=898631566]
-transform = Transform3D(-3, 8.742278e-08, 1.3113417e-07, -1.3113417e-07, 5.4633998e-15, -3, -2.6226834e-07, -0.99999994, 5.7320532e-15, -1, 3, 8)
-mesh = SubResource("PlaneMesh_tp648")
-surface_material_override/0 = SubResource("StandardMaterial3D_0jpfo")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1272491397]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -70,57 +45,8 @@ mesh = SubResource("PlaneMesh_n8be1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1823912469]
 shape = SubResource("BoxShape3D_tp648")
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=356000426 node_paths=PackedStringArray("camera")]
+[node name="Player" parent="." unique_id=1794736719 instance=ExtResource("2_tp648")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("1_23sq3")
-camera = NodePath("SpringArmPivot/Camera3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=2097835878]
-shape = SubResource("CapsuleShape3D_cruhp")
-
-[node name="PlayerBody" type="MeshInstance3D" parent="Player" unique_id=713407882]
-mesh = SubResource("CapsuleMesh_0jpfo")
-surface_material_override/0 = SubResource("StandardMaterial3D_cruhp")
-
-[node name="InteractCast" type="RayCast3D" parent="Player/PlayerBody" unique_id=2044971222]
-unique_name_in_owner = true
-target_position = Vector3(0, 0, 4)
-
-[node name="SpringArmPivot" type="Node3D" parent="Player" unique_id=641917712]
-script = ExtResource("2_tp648")
-
-[node name="SpringArm3D" type="SpringArm3D" parent="Player/SpringArmPivot" unique_id=6944286]
-shape = SubResource("SphereShape3D_0jpfo")
-spring_length = 6.0
-
-[node name="SpringPosition" type="Node3D" parent="Player/SpringArmPivot/SpringArm3D" unique_id=461040316]
-
-[node name="Camera3D" type="Camera3D" parent="Player/SpringArmPivot" unique_id=404177590 node_paths=PackedStringArray("spring_arm")]
-script = ExtResource("3_0jpfo")
-spring_arm = NodePath("../SpringArm3D/SpringPosition")
-lerp_power = 6.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Player" unique_id=1016034175]
-
-[node name="BoxContainer" type="BoxContainer" parent="Player/CanvasLayer" unique_id=1259694270]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -58.0
-offset_top = -20.0
-offset_right = 58.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TestLabel" type="Label" parent="Player/CanvasLayer/BoxContainer" unique_id=385873611]
-unique_name_in_owner = true
-modulate = Color(1, 0, 0, 1)
-layout_mode = 2
-text = "Testing Testing
-     Left Click"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1284196340]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 6)
