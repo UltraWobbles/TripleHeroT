@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 import/fbx2gltf/enabled.android=true
 import/fbx2gltf/enabled.web=true
 
+[global_group]
+
+enemies="Enemy Node Group"
+
 [input]
 
 foward={
