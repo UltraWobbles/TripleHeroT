@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ce81n30p5revi" path="res://Scripts/scene_1.gd" id="1_0jpfo"]
 [ext_resource type="PackedScene" uid="uid://mrveyhndeh8d" path="res://Characters/player.tscn" id="2_tp648"]
 [ext_resource type="PackedScene" uid="uid://d0xleyciks66b" path="res://Characters/test_enemy.tscn" id="4_cruhp"]
+[ext_resource type="PackedScene" uid="uid://2xtudbelmf1y" path="res://Characters/line_of_sight.tscn" id="5_cruhp"]
 [ext_resource type="Script" uid="uid://cek3b21h4yfls" path="res://Scripts/testbox.gd" id="6_3pxkc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_23sq3"]
@@ -87,3 +88,6 @@ shape = SubResource("BoxShape3D_tp648")
 
 [node name="Test_Enemy" parent="." unique_id=50755963 instance=ExtResource("4_cruhp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8758216, 1.0185544, 4.7638693)
+
+[node name="LineOfSight" parent="." unique_id=1566210409 instance=ExtResource("5_cruhp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4350505, 1.5185547, 9.288876)
