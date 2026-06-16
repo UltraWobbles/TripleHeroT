@@ -1,9 +1,25 @@
 [gd_scene format=3 uid="uid://bfo8tkqjopkvq"]
 
-[node name="Control" type="Control" unique_id=1313054170]
+[node name="Node2D" type="Node2D" unique_id=463469192]
+
+[node name="ButtonManager" type="Control" parent="." unique_id=523437591]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 4
+
+[node name="Start" type="Button" parent="ButtonManager" unique_id=1902087389]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 530.0
+offset_top = 270.0
+offset_right = 685.0
+offset_bottom = 358.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "START "
