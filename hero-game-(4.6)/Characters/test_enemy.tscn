@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://d0xleyciks66b"]
+
+[ext_resource type="Script" uid="uid://b4xtoi23gt0yl" path="res://Scripts/enemy.gd" id="1_x3ej8"]
+[ext_resource type="Texture2D" uid="uid://batsa334uutbv" path="res://Images/AD.jpg" id="2_1v0cd"]
+[ext_resource type="PackedScene" uid="uid://2xtudbelmf1y" path="res://Characters/line_of_sight.tscn" id="3_1v0cd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tmf4i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_obt0u"]
+albedo_color = Color(0.8913317, 0, 0.010962164, 1)
+albedo_texture = ExtResource("2_1v0cd")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x3ej8"]
+
+[node name="Test_Enemy" type="CharacterBody3D" unique_id=50755963 groups=["enemies"]]
+script = ExtResource("1_x3ej8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1787794867]
+mesh = SubResource("CapsuleMesh_tmf4i")
+surface_material_override/0 = SubResource("StandardMaterial3D_obt0u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1892160541]
+shape = SubResource("CapsuleShape3D_x3ej8")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=352869758]
+path_height_offset = 0.1
+
+[node name="LineOfSight" parent="." unique_id=1566210409 instance=ExtResource("3_1v0cd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.39999998)

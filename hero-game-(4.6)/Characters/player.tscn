@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://mrveyhndeh8d"]
+
+[ext_resource type="Script" uid="uid://c687t8r88lm7u" path="res://Scripts/Player.gd" id="1_65n15"]
+[ext_resource type="PackedScene" uid="uid://royo21244vks" path="res://Models/son.fbx" id="2_65n15"]
+[ext_resource type="Script" uid="uid://dta6lcvkvk6bo" path="res://Scripts/SpringCamera.gd" id="3_4m0gv"]
+[ext_resource type="Script" uid="uid://bu7q0r5mtot54" path="res://Scripts/camera_follow.gd" id="4_p728j"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cruhp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0jpfo"]
+radius = 0.3
+
+[node name="Player" type="CharacterBody3D" unique_id=1794736719 node_paths=PackedStringArray("camera")]
+script = ExtResource("1_65n15")
+camera = NodePath("SpringArmPivot/Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1851791356]
+shape = SubResource("CapsuleShape3D_cruhp")
+
+[node name="son" parent="." unique_id=994984799 instance=ExtResource("2_65n15")]
+unique_name_in_owner = true
+transform = Transform3D(0.909, 0, 0, 0, 1, 0, 0, 0, 0.909, 0, -1, 0)
+
+[node name="InteractCast" type="RayCast3D" parent="son" unique_id=911682408]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, 4)
+
+[node name="SpringArmPivot" type="Node3D" parent="." unique_id=269667554]
+script = ExtResource("3_4m0gv")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" unique_id=992683439]
+shape = SubResource("SphereShape3D_0jpfo")
+spring_length = 6.0
+
+[node name="SpringPosition" type="Node3D" parent="SpringArmPivot/SpringArm3D" unique_id=952088855]
+
+[node name="Camera3D" type="Camera3D" parent="SpringArmPivot" unique_id=2008092721 node_paths=PackedStringArray("spring_arm")]
+script = ExtResource("4_p728j")
+spring_arm = NodePath("../SpringArm3D/SpringPosition")
+lerp_power = 6.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=153727000]
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer" unique_id=48885929]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -20.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TestLabel" type="Label" parent="CanvasLayer/BoxContainer" unique_id=781621427]
+unique_name_in_owner = true
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+text = "Testing Testing
+     Left Click"

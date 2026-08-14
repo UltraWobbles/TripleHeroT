@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://2xtudbelmf1y"]
+
+[ext_resource type="Script" uid="uid://i4406evseaa3" path="res://Scripts/LOS.gd" id="1_j4l08"]
+[ext_resource type="PackedScene" uid="uid://t5a41wyqe8sp" path="res://Models/cone.tscn" id="1_sx16a"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j4l08"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gyxy"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y7h8a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnp7y"]
+albedo_color = Color(0, 0.56078434, 0, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_55w75"]
+points = PackedVector3Array(-9.787083e-05, 0.5, -9.787083e-05, 0.13390762, -0.5, -0.5, -0.13400549, -0.5, -0.5, -0.36609238, -0.5, -0.36609238, -0.5, -0.5, -0.13400549, -0.5, -0.5, 0.13390762, -0.36609238, -0.5, 0.3659945, -0.13400549, -0.5, 0.5, 0.13390762, -0.5, 0.5, 0.3659945, -0.5, 0.3659945, 0.5, -0.5, 0.13390762, 0.5, -0.5, -0.13400549, 0.3659945, -0.5, -0.36609238)
+
+[node name="LineOfSight" type="Node3D" unique_id=1566210409]
+script = ExtResource("1_j4l08")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1745760999]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_j4l08")
+surface_material_override/0 = SubResource("StandardMaterial3D_6gyxy")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=693604849]
+transform = Transform3D(0.19999999, 0, 0, 0, 0.19999999, 0, 0, 0, 0.19999999, 0, 0, -0.216)
+mesh = SubResource("BoxMesh_y7h8a")
+surface_material_override/0 = SubResource("StandardMaterial3D_wnp7y")
+
+[node name="VisionArea" type="Area3D" parent="." unique_id=1115732006]
+
+[node name="cone" parent="VisionArea" unique_id=1534015013 instance=ExtResource("1_sx16a")]
+transform = Transform3D(9.553426e-15, 2.1855695e-07, 5, 5, -2.1855695e-07, 8.4703295e-22, 2.1855695e-07, 5, -2.1855695e-07, 0, 0, -2.7209363)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisionArea" unique_id=1721169606]
+transform = Transform3D(9.553426e-15, 2.1855695e-07, 5, 5, -2.1855695e-07, 8.4703295e-22, 2.1855695e-07, 5, -2.1855695e-07, 0, 0, -2.7209363)
+shape = SubResource("ConvexPolygonShape3D_55w75")
+
+[node name="VisionTimer" type="Timer" parent="." unique_id=312252127]
+wait_time = 0.25
+autostart = true
+
+[node name="VisionRayCast" type="RayCast3D" parent="." unique_id=260750444]
+target_position = Vector3(0, 0, -10)
+debug_shape_custom_color = Color(0.81960785, 0, 0, 1)
+
+[connection signal="timeout" from="VisionTimer" to="." method="_on_vision_timer_timeout"]

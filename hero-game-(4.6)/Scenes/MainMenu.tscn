@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bfo8tkqjopkvq"]
+
+[ext_resource type="Script" uid="uid://bs6kt3jww7gc7" path="res://Scripts/main_menu.gd" id="1_tt5f1"]
+
+[node name="MainMenu" type="Node2D" unique_id=463469192]
+script = ExtResource("1_tt5f1")
+
+[node name="ButtonManager" type="Control" parent="." unique_id=523437591]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 4
+
+[node name="Start" type="Button" parent="ButtonManager" unique_id=1902087389]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 28.0
+offset_top = 112.0
+offset_right = 183.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.83137256, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.5529412, 1, 1)
+theme_override_colors/font_hover_color = Color(0.58431375, 1, 0, 1)
+theme_override_font_sizes/font_size = 42
+text = "START "
+
+[node name="Quit" type="Button" parent="ButtonManager" unique_id=525751548]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 419.0
+offset_right = 208.0
+offset_bottom = 502.0
+theme_override_colors/font_color = Color(1, 0.15134397, 0.10833255, 1)
+theme_override_colors/font_pressed_color = Color(1, 0, 0.14117648, 1)
+theme_override_colors/font_hover_color = Color(0.4627451, 0, 0, 1)
+theme_override_font_sizes/font_size = 47
+text = "Quit"
+
+[connection signal="pressed" from="ButtonManager/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="ButtonManager/Quit" to="." method="_on_quit_pressed"]
